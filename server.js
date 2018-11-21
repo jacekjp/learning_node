@@ -15,7 +15,10 @@ function start(route, handle){
             postDataChunk + "'.");
         });
 
-        route(handle, pathname, response);
+        request.addListener("end", function(){
+            route(handle, pathname, response, postData);
+        });
+
     }
 
     http.createServer(onRequest).listen(8888);
